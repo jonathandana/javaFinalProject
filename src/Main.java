@@ -1,6 +1,7 @@
 import menu.MenuCreator;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Scanner;
 
 enum ShowAllPeoplesOptions{
@@ -32,9 +33,9 @@ public class Main {
             options.add("8) Show Students by score range");
             options.add("9) Quit");
 
-            var userResponse = MenuCreator.generateMenu(options, "Please choose your option:");
-
-            switch (userResponse) {
+            Object userResponse = MenuCreator.generateMenu(options, "Please choose your option:");
+            int result = (Integer) userResponse;
+            switch (result) {
                 case 1 -> {
                     var teacher = new Teacher();
                     teacher.input();
@@ -49,7 +50,7 @@ public class Main {
                 case 4 -> showAllPeoples(ShowAllPeoplesOptions.TEACHER);
                 case 5 -> showAllPeoples(ShowAllPeoplesOptions.STUDENT);
                 case 6 -> showTeacherByID();
-                case 7 -> System.out.println("Show Student by ID");
+                case 7 -> showStudentByID();
                 case 8 -> System.out.println("Show Students by score range");
                 case 9 -> isRunning = false;
                 default -> System.err.println("Error: invalid option");
@@ -86,6 +87,50 @@ public class Main {
         }
         if(!found){
             System.out.println("Doesn't exists");
+        }
+    }
+
+
+    public static void showStudentByID(){
+        System.out.println("Please Enter the Student ID: ");
+        int id = IN.nextInt();
+        boolean found = false;
+
+        for (var person : PEOPLE){
+            if(id == person.id){
+                found = true;
+                if(person instanceof Student){
+                    System.out.println(person);
+                    subMenuStudent(person);
+                }else{
+                    System.out.println("Not a student");
+                }
+                break;
+            }
+        }
+        if(!found){
+            System.out.println("Doesn't exists");
+        }
+    }
+
+    private static void subMenuStudent(Person student) {
+        boolean isRunning = true;
+        while (isRunning) {
+            List<String> options = new ArrayList<>();
+            options.add("a) Show All Score");
+            options.add("b) Insert New Score");
+            options.add("c) Show Average Score");
+            options.add("c) Return to the Main Menu");
+
+            Object userResponse = MenuCreator.generateMenu(options, "Please choose your option:");
+            String result = (String) userResponse;
+
+            switch (result){
+                case "a" -> System.out.println("a");
+                case "b" -> System.out.println("b");
+                case "c" -> System.out.println("c");
+                case "d" -> isRunning = false;
+            }
         }
     }
 }
