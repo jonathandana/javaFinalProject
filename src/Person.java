@@ -13,7 +13,7 @@ public class Person {
     private String lastName;
     private MaritalStatus status;
 
-    private final Scanner in  = new Scanner(System.in);
+    protected final Scanner in  = new Scanner(System.in);
 
     public void input(){
         Scanner in  = new Scanner(System.in);
@@ -65,7 +65,7 @@ public class Person {
 
     @Override
     public String toString() {
-        return String.format("%d %s %s %s", id, firstName, lastName, status);
+        return String.format("ID:%d first name:%s last name: %s status: %s", id, firstName, lastName, status);
     }
 
 

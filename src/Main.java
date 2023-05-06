@@ -4,7 +4,11 @@ import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
-        mainMenu();
+        var teacher = new Teacher();
+        teacher.input();
+        System.out.println(teacher);
+
+        //mainMenu();
         System.out.println("Good By");
     }
 
