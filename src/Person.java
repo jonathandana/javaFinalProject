@@ -8,7 +8,7 @@ enum MaritalStatus{
 }
 
 public class Person {
-    private int id;
+    public int id;
     private String firstName;
     private String lastName;
     private MaritalStatus status;

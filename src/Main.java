@@ -1,6 +1,7 @@
 import menu.MenuCreator;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 enum ShowAllPeoplesOptions{
     ALL,
@@ -10,6 +11,8 @@ enum ShowAllPeoplesOptions{
 }
 public class Main {
     private static final List<Person> PEOPLE = new ArrayList<>();
+    public static final Scanner IN  = new Scanner(System.in);
+
     public static void main(String[] args) {
         mainMenu();
         System.out.println("Good By");
@@ -45,7 +48,7 @@ public class Main {
                 case 3 -> showAllPeoples(ShowAllPeoplesOptions.ALL);
                 case 4 -> showAllPeoples(ShowAllPeoplesOptions.TEACHER);
                 case 5 -> showAllPeoples(ShowAllPeoplesOptions.STUDENT);
-                case 6 -> System.out.println("Show Teacher by ID");
+                case 6 -> showTeacherByID();
                 case 7 -> System.out.println("Show Student by ID");
                 case 8 -> System.out.println("Show Students by score range");
                 case 9 -> isRunning = false;
@@ -64,5 +67,25 @@ public class Main {
             }
         }
         System.out.println("--------------------------------------------------------------------------");
+    }
+
+    public static void showTeacherByID(){
+        System.out.println("Please Enter the Teacher ID: ");
+        int id = IN.nextInt();
+        boolean found = false;
+        for (var person : PEOPLE){
+            if(id == person.id){
+                found = true;
+                if(person instanceof Teacher){
+                    System.out.println(person);
+                }else{
+                    System.out.println("Not a teacher");
+                }
+                break;
+            }
+        }
+        if(!found){
+            System.out.println("Doesn't exists");
+        }
     }
 }
