@@ -10,7 +10,7 @@ public class MenuCreator {
         for (var option : options){
             System.out.println(option);
         }
-
+        System.out.println("Please Enter your choose:");
         Scanner in = new Scanner(System.in);
         return in.nextInt();
 

@@ -2,13 +2,16 @@ import menu.MenuCreator;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Main {
-    public static void main(String[] args) {
-        var teacher = new Teacher();
-        teacher.input();
-        System.out.println(teacher);
+enum ShowAllPeoplesOptions{
+    ALL,
+    STUDENT,
+    TEACHER
 
-        //mainMenu();
+}
+public class Main {
+    private static final List<Person> PEOPLE = new ArrayList<>();
+    public static void main(String[] args) {
+        mainMenu();
         System.out.println("Good By");
     }
 
@@ -30,13 +33,18 @@ public class Main {
 
             switch (userResponse) {
                 case 1 -> {
-                    var person = new Person();
-                    person.input();
+                    var teacher = new Teacher();
+                    teacher.input();
+                    PEOPLE.add(teacher);
                 }
-                case 2 -> System.out.println("Add Student");
-                case 3 -> System.out.println("Show All People");
-                case 4 -> System.out.println("Show All Student");
-                case 5 -> System.out.println("Show Teacher by ID");
+                case 2 -> {
+                    var student = new Student();
+                    student.input();
+                    PEOPLE.add(student);
+                }
+                case 3 -> showAllPeoples(ShowAllPeoplesOptions.ALL);
+                case 4 -> showAllPeoples(ShowAllPeoplesOptions.TEACHER);
+                case 5 -> showAllPeoples(ShowAllPeoplesOptions.STUDENT);
                 case 6 -> System.out.println("Show Teacher by ID");
                 case 7 -> System.out.println("Show Student by ID");
                 case 8 -> System.out.println("Show Students by score range");
@@ -44,5 +52,17 @@ public class Main {
                 default -> System.err.println("Error: invalid option");
             }
         }
+    }
+
+
+    public static void showAllPeoples(ShowAllPeoplesOptions option){
+        for (var person : PEOPLE){
+            switch (option){
+                case ALL -> System.out.println(person);
+                case TEACHER -> {if(person instanceof Teacher) System.out.println(person);}
+                case STUDENT -> {if(person instanceof Student) System.out.println(person);}
+            }
+        }
+        System.out.println("--------------------------------------------------------------------------");
     }
 }

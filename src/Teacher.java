@@ -2,6 +2,7 @@ public class Teacher extends Person {
     private double wage;
 
     public void  input(){
+        System.out.println("New Teacher");
         super.input();
         String enter_wage = "Enter the teacher's wage: ";
         System.out.print(enter_wage);
