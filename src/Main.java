@@ -101,7 +101,7 @@ public class Main {
                 found = true;
                 if(person instanceof Student){
                     System.out.println(person);
-                    subMenuStudent(person);
+                    subMenuStudent((Student) person);
                 }else{
                     System.out.println("Not a student");
                 }
@@ -113,22 +113,23 @@ public class Main {
         }
     }
 
-    private static void subMenuStudent(Person student) {
+    private static void subMenuStudent(Student student) {
+
         boolean isRunning = true;
         while (isRunning) {
             List<String> options = new ArrayList<>();
-            options.add("a) Show All Score");
+            options.add("a) Show All Scores");
             options.add("b) Insert New Score");
             options.add("c) Show Average Score");
-            options.add("c) Return to the Main Menu");
+            options.add("d) Return to the Main Menu");
 
             Object userResponse = MenuCreator.generateMenu(options, "Please choose your option:");
             String result = (String) userResponse;
 
             switch (result){
-                case "a" -> System.out.println("a");
-                case "b" -> System.out.println("b");
-                case "c" -> System.out.println("c");
+                case "a" -> student.showAllScores();
+                case "b" -> student.addScore();
+                case "c" -> System.out.println("your average is: "+student.getAverageScore());
                 case "d" -> isRunning = false;
             }
         }
