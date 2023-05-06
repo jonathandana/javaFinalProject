@@ -9,11 +9,20 @@ enum MaritalStatus{
 
 public class Person {
     public int id;
-    private String firstName;
-    private String lastName;
+    protected String firstName;
+
+    public String getFullName() {
+        return firstName+" "+lastName;
+    }
+
+    protected String lastName;
     private MaritalStatus status;
 
     protected final Scanner in  = new Scanner(System.in);
+
+    public int getId() {
+        return id;
+    }
 
     public void input(){
         Scanner in  = new Scanner(System.in);
@@ -41,6 +50,7 @@ public class Person {
         id = in.nextInt();
         in.nextLine();
     }
+
 
     private void enterStatus(){
         boolean isValidStatus = false;

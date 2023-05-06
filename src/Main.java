@@ -51,7 +51,7 @@ public class Main {
                 case 5 -> showAllPeoples(ShowAllPeoplesOptions.STUDENT);
                 case 6 -> showTeacherByID();
                 case 7 -> showStudentByID();
-                case 8 -> System.out.println("Show Students by score range");
+                case 8 -> showStudentsByScoreRange();
                 case 9 -> isRunning = false;
                 default -> System.err.println("Error: invalid option");
             }
@@ -133,5 +133,38 @@ public class Main {
                 case "d" -> isRunning = false;
             }
         }
+    }
+
+    public static void showStudentsByScoreRange(){
+        System.out.print("Enter the minimum score: ");
+        double minScore = IN.nextDouble();
+
+        System.out.print("Enter the maximum score: ");
+        double maxScore = IN.nextDouble();
+
+        ArrayList<Student> studentsInRange = new ArrayList<>();
+
+
+        for (Person person : PEOPLE) {
+            if (person instanceof Student) {
+                Student student = (Student) person;
+                double averageScore = student.getAverageScore();
+                if (averageScore >= minScore && averageScore <= maxScore) {
+                    studentsInRange.add(student);
+                }
+            }
+        }
+
+        if (studentsInRange.isEmpty()) {
+            System.out.println("No students found in the specified score range.");
+        }
+        else {
+            System.out.printf("Students with average score between %.2f and %.2f:\n", minScore, maxScore);
+            for (Student student : studentsInRange) {
+                System.out.printf("%s (ID %d) - Average Score: %.2f\n", student.getFullName(), student.getId(), student.getAverageScore());
+            }
+        }
+
+
     }
 }
